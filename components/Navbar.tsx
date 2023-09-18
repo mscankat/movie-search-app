@@ -10,7 +10,7 @@ export default function Navbar() {
   const [checked, setChecked] = useState(new Array(3).fill(false));
   const [platformList, setPlatformList] = useState<platform[] | null>(null);
   const [genreList, setGenreList] = useState<genre[] | null>(null);
-  const [selected, setSelected] = useState<genre[] | null>(null);
+  const [selected, setSelected] = useState<genre | null>(null);
   const apiURL = process.env.NEXT_PUBLIC_SERVER_HOST || "";
 
   const handleSubmit = (e: React.MouseEvent) => {
@@ -26,7 +26,7 @@ export default function Navbar() {
     console.log(typeof value);
     const dataToSend: postType = {
       year: value,
-      genres: selected,
+      genres: selected || null,
       platforms: selectedPlatforms,
     };
     fetch(apiURL + "/api/search", {

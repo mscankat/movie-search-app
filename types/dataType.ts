@@ -64,6 +64,6 @@ export interface platformList {
 
 export interface postType {
   year: string;
-  genres: genre[] | null;
-  platforms: platform[] | null;
+  genres: genre | null;
+  platforms: platform | null;
 }

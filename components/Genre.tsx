@@ -10,8 +10,8 @@ export default function Genre({
 }: {
   genreList: genre[] | null;
   setGenreList: Dispatch<SetStateAction<genre[] | null>>;
-  selected: genre[] | null;
-  setSelected: Dispatch<SetStateAction<genre[] | null>>;
+  selected: genre | null;
+  setSelected: Dispatch<SetStateAction<genre | null>>;
 }) {
   const apiURL = process.env.NEXT_PUBLIC_SERVER_HOST || "";
   useEffect(() => {
@@ -35,19 +35,15 @@ export default function Genre({
             <div
               key={genre.genreId}
               onClick={(e: React.MouseEvent) => {
-                if (!selected?.includes(genre)) {
-                  setSelected((previous) => {
-                    return previous ? [...previous, genre] : [genre];
-                  });
+                console.log(genre === selected);
+                if (genre === selected) {
+                  setSelected(null);
                 } else {
-                  setSelected(
-                    (previous) =>
-                      previous && previous.filter((val) => val !== genre)
-                  );
+                  setSelected(genre);
                 }
               }}
               className={`${
-                selected?.includes(genre) ? "bg-red-300" : "bg-white"
+                selected === genre ? "bg-red-300" : "bg-white"
               } px-3 mx-1 my-1  rounded-full border border-black cursor-pointer transition-colors `}
             >
               {genre.genreName}

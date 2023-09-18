@@ -40,5 +40,5 @@ export async function POST(req: Request) {
     }
   };
   await getData();
-  return NextResponse.json({ success: "true" });
+  return NextResponse.json(movies);
 }
