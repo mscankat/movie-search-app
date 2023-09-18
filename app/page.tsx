@@ -18,13 +18,7 @@ export default function Home() {
           method: "POST",
           body: JSON.stringify({
             pageNumber: 1,
-            pageSize: 0,
-            // movieId: "string",
-            // releaseYear: "string",
-            // genreId: "string",
-            // directorId: "string",
-            // actorId: "string",
-            // platformId: "string",
+            pageSize: 20,
           }),
           headers: {
             "Content-Type": "application/json",
