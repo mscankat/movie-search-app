@@ -46,9 +46,9 @@ export default function Home() {
       <SearchBar data={data} setData={setData} />
 
       <div className="p-16 text-5xl">Results</div>
-      <div className="flex flex-wrap px-28 gap-20 justify-center">
-        <List data={data} setData={setData} />
-      </div>
+
+      <List data={data} setData={setData} />
+
       <div className="h-20 bg-slate-400">footer</div>
     </>
   );

@@ -2,16 +2,47 @@ import { movie } from "@/types/dataType";
 
 export default function Card({ movie }: { movie: movie }) {
   return (
-    <div className="w-64 hover:shadow-md cursor-pointer p-2 rounded-sm">
+    <div className="w-[300px] hover:shadow-md cursor-pointer p-2 rounded-sm">
       <img
-        className="w-60 h-[360px] rounded-sm object-cover"
+        className="w-80 h-[360px] rounded-sm object-fill"
         src={movie.posterUrl || "no-image.svg"}
         onError={(e) => (e.currentTarget.src = "no-image.svg")}
         alt="movie poster"
       />
-      <div>{movie.releaseYear}</div>
-      <div>{movie.name}</div>
-      <div>{movie.rating}</div>
+      <div className="flex justify-between mt-1">
+        <div>
+          <div className="flex justify-between">
+            {movie.releaseYear}{" "}
+            <span>
+              <div className="flex gap-1">
+                {movie.platforms.map((platform) => {
+                  return (
+                    <img
+                      className="w-14"
+                      src={platform.platformLogoUrl}
+                      alt="platform logo"
+                    />
+                  );
+                })}
+              </div>
+            </span>
+          </div>
+          <div className="text-sm font-semibold">{movie.name}</div>
+          <div className="text-xs">Rating:{movie.rating}/10</div>
+          <div className="text-xs">Director:{movie.director.directorName}</div>
+          <div className="flex flex-wrap text-xs ">
+            Cast:
+            {movie.actors.map((actor) => {
+              return (
+                <div className="hover:underline cursor-pointer mx-1">
+                  {actor.actorName}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
       {/* <div>{movie.platforms[1].platformName}</div> */}
     </div>
   );

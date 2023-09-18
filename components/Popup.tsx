@@ -48,6 +48,17 @@ export default function Popup({
                 {movie.director.directorName}
               </span>
             </div>
+            <div className="flex mt-2 gap-4">
+              {movie.platforms.map((platform) => {
+                return (
+                  <img
+                    className="w-24"
+                    src={platform.platformLogoUrl}
+                    alt="platform logo"
+                  />
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>
