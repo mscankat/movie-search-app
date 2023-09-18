@@ -1,7 +1,8 @@
 import { movie } from "@/types/dataType";
 import Card from "./Card";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { usePostContext } from "@/utils/PostContext";
+import Popup from "./Popup";
 
 export default function List({
   data,
@@ -10,8 +11,15 @@ export default function List({
   data: movie[] | null;
   setData: Dispatch<SetStateAction<movie[] | null>>;
 }) {
+  const [selectedMovie, setSelectedMovie] = useState<movie | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const apiURL = process.env.NEXT_PUBLIC_SERVER_HOST || "";
   const { post, setPost } = usePostContext();
+  const handleCardClick = (movie: movie) => {
+    setSelectedMovie(movie);
+    setIsModalOpen(true);
+  };
+
   const handleSubmit = () => {
     if (!post) {
       return;
@@ -35,17 +43,22 @@ export default function List({
   };
   return (
     <>
-      {data &&
-        data.map((movie) => {
-          return (
-            <div className="movie">
-              <Card movie={movie} />
-            </div>
-          );
-        })}
-      <div onClick={handleSubmit} className=" mb-24">
+      <div className="flex flex-wrap  gap-20 justify-center">
+        {data &&
+          data.map((movie) => {
+            return (
+              <div className="movie" onClick={() => handleCardClick(movie)}>
+                <Card movie={movie} />
+              </div>
+            );
+          })}
+      </div>
+      <div onClick={handleSubmit} className=" my-24 text-center">
         More
       </div>
+      {isModalOpen && selectedMovie && (
+        <Popup movie={selectedMovie} onClose={() => setIsModalOpen(false)} />
+      )}
     </>
   );
 }
