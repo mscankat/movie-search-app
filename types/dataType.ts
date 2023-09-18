@@ -15,6 +15,10 @@ export interface actor {
   actorId: string;
   actorName: string;
 }
+export interface genre {
+  genreId: string;
+  genreName: string;
+}
 export interface director {
   directorId: string;
   directorName: string;
@@ -35,4 +39,10 @@ export interface dataType {
   };
   statusCode: number;
   error: string;
+}
+
+export interface genreList {
+  data: {
+    genres: genre[];
+  };
 }
