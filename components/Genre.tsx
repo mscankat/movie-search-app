@@ -1,14 +1,19 @@
 "use client";
 import { genre, genreList } from "@/types/dataType";
-import React, { useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 
-export default function Genre() {
-  const [genreList, setGenreList] = useState<genre[]>();
-  const [selected, setSelected] = useState<genre[]>();
+export default function Genre({
+  genreList,
+  setGenreList,
+  selected,
+  setSelected,
+}: {
+  genreList: genre[] | null;
+  setGenreList: Dispatch<SetStateAction<genre[] | null>>;
+  selected: genre[] | null;
+  setSelected: Dispatch<SetStateAction<genre[] | null>>;
+}) {
   const apiURL = process.env.NEXT_PUBLIC_SERVER_HOST || "";
-  const handleClick = (e: React.MouseEvent) => {
-    const genre = e.currentTarget.innerHTML;
-  };
   useEffect(() => {
     const getData = async () => {
       try {
@@ -35,8 +40,9 @@ export default function Genre() {
                     return previous ? [...previous, genre] : [genre];
                   });
                 } else {
-                  setSelected((previous) =>
-                    previous?.filter((val) => val !== genre)
+                  setSelected(
+                    (previous) =>
+                      previous && previous.filter((val) => val !== genre)
                   );
                 }
               }}

@@ -1,13 +1,17 @@
 "use client";
 import { Box, Slider } from "@mui/material";
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 function valuetext(value: number) {
   return `${value}°C`;
 }
 
-export default function ReleaseYear() {
-  const [value, setValue] = useState<number[]>([1990, 2023]);
-
+export default function ReleaseYear({
+  value,
+  setValue,
+}: {
+  value: number[];
+  setValue: Dispatch<SetStateAction<number[]>>;
+}) {
   const handleChange = (event: Event, newValue: number | number[]) => {
     setValue(newValue as number[]);
   };

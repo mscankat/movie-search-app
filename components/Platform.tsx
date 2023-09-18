@@ -1,10 +1,18 @@
 "use client";
 import { platform, platformList } from "@/types/dataType";
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
-export default function Platform() {
-  const [checked, setChecked] = useState(new Array(3).fill(false));
-  const [platformList, setPlatformList] = useState<platform[]>();
+export default function Platform({
+  checked,
+  setChecked,
+  platformList,
+  setPlatformList,
+}: {
+  checked: boolean[];
+  setChecked: Dispatch<SetStateAction<boolean[]>>;
+  platformList: platform[] | null;
+  setPlatformList: Dispatch<SetStateAction<platform[] | null>>;
+}) {
   const handleChange = (position: number) => {
     const updatedChecked = checked.map((item, index) =>
       index === position ? !item : item
@@ -29,6 +37,7 @@ export default function Platform() {
   return (
     <>
       <div className="">
+        <div className="text-center mb-2 font-semibold">Platforms</div>
         {platformList?.map((platform, index) => {
           return (
             <div key={platform.platformId} className="">
@@ -40,7 +49,7 @@ export default function Platform() {
                 checked={checked[index]}
                 onChange={() => handleChange(index)}
               />
-              <label htmlFor={`checkbox-${index}`}>
+              <label className="ml-2" htmlFor={`checkbox-${index}`}>
                 {platform.platformName}
               </label>
             </div>
