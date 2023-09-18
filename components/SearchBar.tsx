@@ -1,16 +1,25 @@
 "use client";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import Genre from "./Genre";
 import Platform from "./Platform";
 import ReleaseYear from "./ReleaseYear";
-import { genre, platform, postType } from "@/types/dataType";
+import { genre, movie, platform, postType } from "@/types/dataType";
+import { usePostContext } from "@/utils/PostContext";
 
-export default function Navbar() {
+export default function SearchBar({
+  data,
+  setData,
+}: {
+  data: movie[] | null;
+  setData: Dispatch<SetStateAction<movie[] | null>>;
+}) {
+  const { post, setPost } = usePostContext();
   const [value, setValue] = useState<string>("-");
   const [checked, setChecked] = useState(new Array(3).fill(false));
   const [platformList, setPlatformList] = useState<platform[] | null>(null);
   const [genreList, setGenreList] = useState<genre[] | null>(null);
   const [selected, setSelected] = useState<genre | null>(null);
+  // const [page, setPage] = useState<number>(0);
   const apiURL = process.env.NEXT_PUBLIC_SERVER_HOST || "";
 
   const handleSubmit = (e: React.MouseEvent) => {
@@ -23,8 +32,9 @@ export default function Navbar() {
           : (selectedPlatforms = [platform]);
       }
     });
-    console.log(typeof value);
     const dataToSend: postType = {
+      pageNumber: 1,
+      pageCount: 20,
       year: value,
       genres: selected || null,
       platforms: selectedPlatforms,
@@ -32,12 +42,17 @@ export default function Navbar() {
     fetch(apiURL + "/api/search", {
       method: "POST",
       body: JSON.stringify(dataToSend),
-    });
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setData(data.data.movies);
+        setPost(dataToSend);
+      });
   };
   return (
     <>
       <div>home</div>
-      <nav className="flex justify-evenly p-3 border-b h-72 items-center">
+      <div className="flex justify-evenly p-3 border-b h-72 items-center">
         <ReleaseYear value={value} setValue={setValue} />
 
         <Genre
@@ -58,9 +73,7 @@ export default function Navbar() {
         >
           search
         </button>
-
-        <div></div>
-      </nav>
+      </div>
     </>
   );
 }

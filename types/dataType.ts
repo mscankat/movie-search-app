@@ -10,6 +10,7 @@ export interface movie {
   rating: number;
   releaseYear: string;
 }
+
 export interface movieRequest {
   pageNumber: number;
   pageSize: number;
@@ -63,6 +64,8 @@ export interface platformList {
 }
 
 export interface postType {
+  pageNumber: number;
+  pageCount: number;
   year: string;
   genres: genre | null;
   platforms: platform | null;

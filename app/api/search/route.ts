@@ -7,7 +7,7 @@ export async function POST(req: Request) {
   const apiURL = process.env.NEXT_PUBLIC_API_HOST || "";
   let movies;
   const dataToSend: movieRequest = {
-    pageNumber: 1,
+    pageNumber: body.pageNumber,
     pageSize: 20,
   };
   if (body.genres) {
@@ -32,7 +32,6 @@ export async function POST(req: Request) {
           Accept: "application/json",
         },
       });
-      //   console.log(response);
       movies = await response.json();
       console.log(movies);
     } catch (e) {
