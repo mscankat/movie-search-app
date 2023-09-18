@@ -1,5 +1,6 @@
 import { movie } from "@/types/dataType";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Popup({
   movie,
@@ -37,7 +38,9 @@ export default function Popup({
               {movie.actors.map((actor) => {
                 return (
                   <div className="hover:underline cursor-pointer">
-                    {actor.actorName}
+                    <Link href={"cast/" + actor.actorId}>
+                      {actor.actorName}
+                    </Link>
                   </div>
                 );
               })}

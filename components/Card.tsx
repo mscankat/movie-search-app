@@ -6,7 +6,7 @@ export default function Card({ movie }: { movie: movie }) {
       <img
         className="w-[260px] h-[360px] rounded-sm object-fill"
         src={movie.posterUrl || "no-image.svg"}
-        onError={(e) => (e.currentTarget.src = "no-image.svg")}
+        // onError={(e) => (e.currentTarget.src = "no-image.svg")}
         alt="movie poster"
       />
       <div className="flex justify-between mt-1 w-full">
