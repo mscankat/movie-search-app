@@ -1,11 +1,14 @@
 "use client";
 import { genre, genreList } from "@/types/dataType";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function Genre() {
   const [genreList, setGenreList] = useState<genre[] | null>(null);
+  const [selected, setSelected] = useState<genre[]>();
   const apiURL = process.env.NEXT_PUBLIC_SERVER_HOST || "";
-
+  const handleClick = (e: React.MouseEvent) => {
+    const genre = e.currentTarget.innerHTML;
+  };
   useEffect(() => {
     const getData = async () => {
       try {
@@ -18,13 +21,35 @@ export default function Genre() {
       }
     };
     getData();
-  });
+  }, []);
   return (
     <>
       <div>genres</div>
-      {genreList?.map((genre) => {
-        return <div>{genre.genreName}</div>;
-      })}
+      <div className="flex flex-wrap w-96 justify-center">
+        {genreList?.map((genre) => {
+          return (
+            <div
+              key={genre.genreId}
+              onClick={(e: React.MouseEvent) => {
+                if (!selected?.includes(genre)) {
+                  setSelected((previous) => {
+                    return previous ? [...previous, genre] : [genre];
+                  });
+                } else {
+                  setSelected((previous) =>
+                    previous?.filter((val) => val !== genre)
+                  );
+                }
+              }}
+              className={`${
+                selected?.includes(genre) ? "bg-red-300" : "bg-white"
+              } px-3 mx-1 my-1  rounded-full border border-black cursor-pointer`}
+            >
+              {genre.genreName}
+            </div>
+          );
+        })}
+      </div>
     </>
   );
 }
