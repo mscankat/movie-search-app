@@ -11,14 +11,14 @@ export async function POST(req: Request) {
     pageSize: 20,
   };
   if (body.genres) {
-    dataToSend.genreId = body.genres[0].genreId;
+    dataToSend.genreId = body.genres.genreId;
   }
   console.log(body.year);
   if (!Number.isNaN(parseInt(body.year))) {
     dataToSend.releaseYear = body.year.toString();
   }
   if (body.platforms) {
-    dataToSend.platformId = body.platforms[0].platformId;
+    dataToSend.platformId = body.platforms.platformId;
   }
   console.log(dataToSend);
   const getData = async () => {
