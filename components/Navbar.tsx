@@ -3,16 +3,36 @@ import { useState } from "react";
 import Genre from "./Genre";
 import Platform from "./Platform";
 import ReleaseYear from "./ReleaseYear";
-import { genre, platform } from "@/types/dataType";
+import { genre, platform, postType } from "@/types/dataType";
 
 export default function Navbar() {
-  const [value, setValue] = useState<number[]>([1990, 2023]);
+  const [value, setValue] = useState<string>("-");
   const [checked, setChecked] = useState(new Array(3).fill(false));
   const [platformList, setPlatformList] = useState<platform[] | null>(null);
   const [genreList, setGenreList] = useState<genre[] | null>(null);
   const [selected, setSelected] = useState<genre[] | null>(null);
+  const apiURL = process.env.NEXT_PUBLIC_SERVER_HOST || "";
+
   const handleSubmit = (e: React.MouseEvent) => {
     e.preventDefault();
+    let selectedPlatforms: platform[] | null = null;
+    platformList?.forEach((platform, index) => {
+      if (checked[index]) {
+        selectedPlatforms
+          ? selectedPlatforms.push(platform)
+          : (selectedPlatforms = [platform]);
+      }
+    });
+    console.log(typeof value);
+    const dataToSend: postType = {
+      year: value,
+      genres: selected,
+      platforms: selectedPlatforms,
+    };
+    fetch(apiURL + "/api/search", {
+      method: "POST",
+      body: JSON.stringify(dataToSend),
+    });
   };
   return (
     <>
@@ -32,7 +52,12 @@ export default function Navbar() {
           platformList={platformList}
           setPlatformList={setPlatformList}
         />
-        <button className="bg-green-300 w-32 h-12 rounded-md">search</button>
+        <button
+          onClick={handleSubmit}
+          className="bg-green-300 w-32 h-12 rounded-md"
+        >
+          search
+        </button>
 
         <div></div>
       </nav>

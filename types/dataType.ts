@@ -10,6 +10,16 @@ export interface movie {
   rating: number;
   releaseYear: string;
 }
+export interface movieRequest {
+  pageNumber: number;
+  pageSize: number;
+  movieId?: string;
+  releaseYear?: string;
+  genreId?: string;
+  directorId?: string;
+  actorId?: string;
+  platformId?: string;
+}
 
 export interface actor {
   actorId: string;
@@ -50,4 +60,10 @@ export interface platformList {
   data: {
     platforms: platform[];
   };
+}
+
+export interface postType {
+  year: string;
+  genres: genre[] | null;
+  platforms: platform[] | null;
 }
