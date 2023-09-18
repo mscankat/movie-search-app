@@ -1,6 +1,5 @@
 "use client";
 import { platform, platformList } from "@/types/dataType";
-import { Checkbox } from "@mui/material";
 import { useEffect, useState } from "react";
 
 export default function Platform() {
@@ -35,12 +34,15 @@ export default function Platform() {
             <div key={platform.platformId} className="">
               <input
                 type="checkbox"
-                name="prime"
-                id="prime"
+                name={platform.platformName}
+                value={platform.platformName}
+                id={`checkbox-${index}`}
                 checked={checked[index]}
                 onChange={() => handleChange(index)}
               />
-              <div>{platform.platformName}</div>
+              <label htmlFor={`checkbox-${index}`}>
+                {platform.platformName}
+              </label>
             </div>
           );
         })}
