@@ -1,9 +1,10 @@
 "use client";
 import List from "@/components/List";
+import { dataType, movie } from "@/types/dataType";
 import { useEffect, useState } from "react";
 
 export default function Home() {
-  const [data, setData] = useState();
+  const [data, setData] = useState<movie[] | null>(null);
   const apiURL = process.env.NEXT_PUBLIC_SERVER_HOST || "";
   useEffect(() => {
     console.log("asdsad");
@@ -27,7 +28,7 @@ export default function Home() {
             Accept: "*",
           },
         });
-        const movies = await response.json();
+        const movies: dataType = await response.json();
         console.log(movies);
         setData(movies.data.movies);
       } catch (e) {

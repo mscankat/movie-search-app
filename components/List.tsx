@@ -1,15 +1,15 @@
+import { movie } from "@/types/dataType";
 import Card from "./Card";
 
-export default function List({ data }: { data: any }) {
+export default function List({ data }: { data: movie[] | null }) {
   console.log(data);
   return (
     <>
       {data &&
-        data.map((movie: any) => {
+        data.map((movie) => {
           return (
             <div className="movie">
-              {movie.name}
-              <Card />
+              <Card movie={movie} />
             </div>
           );
         })}
