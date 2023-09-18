@@ -46,3 +46,8 @@ export interface genreList {
     genres: genre[];
   };
 }
+export interface platformList {
+  data: {
+    platforms: platform[];
+  };
+}

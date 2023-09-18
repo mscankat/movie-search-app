@@ -1,0 +1,50 @@
+"use client";
+import { platform, platformList } from "@/types/dataType";
+import { Checkbox } from "@mui/material";
+import { useEffect, useState } from "react";
+
+export default function Platform() {
+  const [checked, setChecked] = useState(new Array(3).fill(false));
+  const [platformList, setPlatformList] = useState<platform[]>();
+  const handleChange = (position: number) => {
+    const updatedChecked = checked.map((item, index) =>
+      index === position ? !item : item
+    );
+    setChecked(updatedChecked);
+  };
+  const apiURL = process.env.NEXT_PUBLIC_SERVER_HOST || "";
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        console.log("fetching");
+        const response = await fetch(apiURL + "/api/platforms");
+        const platformData: platformList = await response.json();
+        setPlatformList(platformData.data.platforms);
+      } catch (e) {
+        console.log("fetch error:", e);
+      }
+    };
+    getData();
+  }, []);
+  return (
+    <>
+      <div className="">
+        {platformList?.map((platform, index) => {
+          return (
+            <div key={platform.platformId} className="">
+              <input
+                type="checkbox"
+                name="prime"
+                id="prime"
+                checked={checked[index]}
+                onChange={() => handleChange(index)}
+              />
+              <div>{platform.platformName}</div>
+            </div>
+          );
+        })}
+      </div>
+    </>
+  );
+}

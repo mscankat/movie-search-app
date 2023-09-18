@@ -1,16 +1,20 @@
 import Genre from "./Genre";
+import Platform from "./Platform";
+import ReleaseYear from "./ReleaseYear";
 
 export default function Navbar() {
   return (
-    <nav className="flex justify-between p-3 border-b h-64 items-center">
+    <>
       <div>home</div>
-      <div className="flex justify-center gap-8">
+      <nav className="flex justify-evenly p-3 border-b h-72 items-center">
+        <ReleaseYear />
+
         <Genre />
-        <div>Release Year</div>
-        <div>Platform</div>
+        <Platform />
         <button>search</button>
-      </div>
-      <div></div>
-    </nav>
+
+        <div></div>
+      </nav>
+    </>
   );
 }

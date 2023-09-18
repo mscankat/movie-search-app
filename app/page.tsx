@@ -1,5 +1,6 @@
 "use client";
 import List from "@/components/List";
+import ReleaseYear from "@/components/ReleaseYear";
 import { dataType, movie } from "@/types/dataType";
 import { useEffect, useState } from "react";
 

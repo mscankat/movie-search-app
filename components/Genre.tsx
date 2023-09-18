@@ -3,7 +3,7 @@ import { genre, genreList } from "@/types/dataType";
 import React, { useEffect, useState } from "react";
 
 export default function Genre() {
-  const [genreList, setGenreList] = useState<genre[] | null>(null);
+  const [genreList, setGenreList] = useState<genre[]>();
   const [selected, setSelected] = useState<genre[]>();
   const apiURL = process.env.NEXT_PUBLIC_SERVER_HOST || "";
   const handleClick = (e: React.MouseEvent) => {
@@ -23,9 +23,8 @@ export default function Genre() {
     getData();
   }, []);
   return (
-    <>
-      <div>genres</div>
-      <div className="flex flex-wrap w-96 justify-center">
+    <div>
+      <div className="flex flex-wrap w-[630px] justify-center">
         {genreList?.map((genre) => {
           return (
             <div
@@ -43,13 +42,13 @@ export default function Genre() {
               }}
               className={`${
                 selected?.includes(genre) ? "bg-red-300" : "bg-white"
-              } px-3 mx-1 my-1  rounded-full border border-black cursor-pointer`}
+              } px-3 mx-1 my-1  rounded-full border border-black cursor-pointer transition-colors `}
             >
               {genre.genreName}
             </div>
           );
         })}
       </div>
-    </>
+    </div>
   );
 }

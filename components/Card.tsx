@@ -12,6 +12,7 @@ export default function Card({ movie }: { movie: movie }) {
       <div>{movie.releaseYear}</div>
       <div>{movie.name}</div>
       <div>{movie.rating}</div>
+      {/* <div>{movie.platforms[1].platformName}</div> */}
     </div>
   );
 }
