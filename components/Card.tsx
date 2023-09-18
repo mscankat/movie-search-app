@@ -2,16 +2,16 @@ import { movie } from "@/types/dataType";
 
 export default function Card({ movie }: { movie: movie }) {
   return (
-    <div className="w-[300px] hover:shadow-md cursor-pointer p-2 rounded-sm">
+    <div className="w-[260px] hover:shadow-md cursor-pointer p-2 rounded-sm">
       <img
-        className="w-80 h-[360px] rounded-sm object-fill"
+        className="w-[260px] h-[360px] rounded-sm object-fill"
         src={movie.posterUrl || "no-image.svg"}
         onError={(e) => (e.currentTarget.src = "no-image.svg")}
         alt="movie poster"
       />
-      <div className="flex justify-between mt-1">
-        <div>
-          <div className="flex justify-between">
+      <div className="flex justify-between mt-1 w-full">
+        <div className="w-full">
+          <div className="flex justify-between ">
             {movie.releaseYear}{" "}
             <span>
               <div className="flex gap-1">

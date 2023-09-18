@@ -43,7 +43,7 @@ export default function List({
   };
   return (
     <>
-      <div className="flex flex-wrap  gap-12 justify-center">
+      <div className="flex flex-wrap  gap-20 justify-center">
         {data &&
           data.map((movie) => {
             return (
@@ -53,7 +53,7 @@ export default function List({
             );
           })}
       </div>
-      <div onClick={handleSubmit} className=" mb-24 ">
+      <div onClick={handleSubmit} className=" my-24 text-center">
         More
       </div>
       {isModalOpen && selectedMovie && (
