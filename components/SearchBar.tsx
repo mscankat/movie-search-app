@@ -16,7 +16,7 @@ export default function SearchBar({
   const [checked, setChecked] = useState(new Array(3).fill(false));
   const [platformList, setPlatformList] = useState<platform[] | null>(null);
   const [genreList, setGenreList] = useState<genre[] | null>(null);
-  const [selected, setSelected] = useState<genre[] | null>(null);
+  const [selected, setSelected] = useState<genre[]>([]);
   // const [page, setPage] = useState<number>(0);
   const apiURL = process.env.NEXT_PUBLIC_SERVER_HOST || "";
 

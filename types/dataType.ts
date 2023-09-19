@@ -63,6 +63,6 @@ export interface postType {
   pageNumber: number;
   pageCount: number;
   year: number[];
-  genres: genre[] | null;
+  genres: genre[];
   platforms: platform | null;
 }

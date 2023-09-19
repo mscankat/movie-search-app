@@ -8,9 +8,10 @@ export async function POST(req: Request) {
     "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&append_to_response=details"
   );
   let movies: movie[] = [];
-
-  if (body.genres) {
-    apiURL.searchParams.set("with_genres", body.genres.name);
+  let genreArr: string[] = [];
+  body.genres.forEach((genre) => genreArr.push(genre.id));
+  if (body.genres.length > 0) {
+    apiURL.searchParams.set("with_genres", genreArr.join("|"));
   }
   // console.log(body.year);
   apiURL.searchParams.set(
@@ -27,7 +28,7 @@ export async function POST(req: Request) {
       body.platforms.platformName
     );
   }
-  // console.log(apiURL);
+  console.log(apiURL);
   const getData = async () => {
     try {
       console.log("fetching");

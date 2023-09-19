@@ -11,7 +11,7 @@ export default function Genre({
   genreList: genre[] | null;
   setGenreList: Dispatch<SetStateAction<genre[] | null>>;
   selected: genre[] | null;
-  setSelected: Dispatch<SetStateAction<genre[] | null>>;
+  setSelected: Dispatch<SetStateAction<genre[]>>;
 }) {
   const apiURL = process.env.NEXT_PUBLIC_SERVER_HOST || "";
   useEffect(() => {
