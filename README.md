@@ -1,4 +1,4 @@
-## flight-search-app
+## movie-search-app
 
 This is my case study for SabancıDx Talent Program.
 This is a movie search app built using Next.js on the frontend and backend. It provides users with a platform to find good movies to watch.
