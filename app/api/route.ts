@@ -1,27 +1,35 @@
+import { movie } from "@/types/dataType";
+import { options } from "@/utils/fetchOptions";
 import { NextResponse } from "next/server";
 
-export async function POST(req: Request) {
-  const body = await req.json();
-  console.log(typeof body);
-  const apiURL = process.env.NEXT_PUBLIC_API_HOST || "";
-  let movies;
+export async function GET() {
+  const url = new URL(
+    "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1"
+  );
+  url.searchParams.set("api_key", process.env.NEXT_PUBLIC_API_KEY || "");
+  let movies: movie[] = [];
   const getData = async () => {
+    console.log(options);
     try {
       console.log("fetching");
-      const response = await fetch(apiURL + "/get-movie-list", {
-        method: "POST",
-        body: JSON.stringify(body),
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      });
-      console.log(response);
-      movies = await response.json();
-      console.log(movies);
+      const response = await fetch(url, options);
+      const data = await response.json();
+      movies = data.results;
     } catch (e) {
       console.log("fetch error:", e);
     }
+    const moviePromises = movies.map(async (movie) => {
+      const creditURL = new URL(
+        `https://api.themoviedb.org/3/movie/${movie.id}/credits?language=en-US`
+      );
+      const response = await fetch(creditURL, options);
+      const data = await response.json();
+      movie.director = data.crew.filter(({ job }: any) => job === "Director");
+      movie.actors = [data.cast[0], data.cast[1], data.cast[2]];
+      return movie;
+    });
+
+    await Promise.all(moviePromises);
   };
   await getData();
   return NextResponse.json(movies);

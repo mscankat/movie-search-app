@@ -22,46 +22,58 @@ export default function Popup({
             </button>
           </div>
           <div className="mt-4">
-            {/* Display movie details here */}
             <img
-              className="m-auto rounded"
-              src={movie.posterUrl}
+              className="m-auto rounded h-[300px] object-scale-down w-full "
+              src={
+                "https://image.tmdb.org/t/p/original/" + movie.backdrop_path ||
+                movie.poster_path
+              }
+              onError={(e) => (e.currentTarget.src = "/no-image.svg")}
               alt="movie poster"
               width={240}
               height={360}
             />
-            <div className="text-sm font-light">{movie.releaseYear}</div>
-            <div className="text-2xl font-bold">{movie.name}</div>
-            <div className="mb-2">{movie.descriptionContent}</div>
-            <div className="flex gap-2 text-sm">
-              Cast:
-              {movie.actors.map((actor) => {
-                return (
-                  <div className="hover:underline cursor-pointer">
-                    <Link href={"cast/" + actor.actorId}>
-                      {actor.actorName}
-                    </Link>
-                  </div>
-                );
-              })}
-            </div>
-            <div className="mt-1 text-sm">
-              Director:
-              <span className="hover:underline cursor-pointer ml-2">
-                {movie.director.directorName}
-              </span>
-            </div>
-            <div className="flex mt-2 gap-4">
-              {movie.platforms.map((platform) => {
-                return (
-                  <img
-                    className="w-24"
-                    src={platform.platformLogoUrl}
-                    alt="platform logo"
-                  />
-                );
-              })}
-            </div>
+            <div className="text-sm font-light">{movie.release_date}</div>
+            <div className="text-2xl font-bold">{movie.title}</div>
+            <div className="mb-2">{movie.overview}</div>
+            {movie.actors && (
+              <div className="flex gap-2 text-sm">
+                Cast:
+                {movie.actors.map((actor) => {
+                  return (
+                    <div className="hover:underline cursor-pointer">
+                      <Link
+                        href={
+                          "cast/" +
+                          actor.id +
+                          "-" +
+                          actor.name.split(" ").join("-")
+                        }
+                      >
+                        {actor.name}
+                      </Link>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+            {movie.director && (
+              <div className="mt-1 text-sm">
+                Director:
+                <span className="hover:underline cursor-pointer ml-2">
+                  <Link
+                    href={
+                      "director/" +
+                      movie.director[0].id +
+                      "-" +
+                      movie.director[0].name.split(" ").join("-")
+                    }
+                  >
+                    {movie.director[0].name}
+                  </Link>
+                </span>
+              </div>
+            )}
           </div>
         </div>
       </div>

@@ -1,14 +1,19 @@
 export interface movie {
+  overview: string;
+  genre_ids: number[];
+  id: number;
+  title: string;
+  backdrop_path: string;
+  poster_path: string;
+  vote_average: number;
+  release_date: string;
   actors: actor[];
-  descriptionContent: string;
-  director: director;
-  genres: string[];
-  movieId: string;
+  director: actor[];
+  job?: string;
+}
+export interface actor {
+  id: number;
   name: string;
-  platforms: platform[];
-  posterUrl: string;
-  rating: number;
-  releaseYear: string;
 }
 
 export interface movieRequest {
@@ -27,8 +32,8 @@ export interface actor {
   actorName: string;
 }
 export interface genre {
-  genreId: string;
-  genreName: string;
+  id: number;
+  name: string;
 }
 export interface director {
   directorId: string;
@@ -36,37 +41,27 @@ export interface director {
 }
 
 export interface platform {
-  platformId: string;
-  platformLogoUrl: string;
-  platformName: string;
+  provider_id: string;
+  logo_path: string;
+  provider_name: string;
 }
 
 export interface dataType {
-  data: {
-    pageNumber: number;
-    pageCount: number;
-    totalRecord: number;
-    movies: movie[];
-  };
-  statusCode: number;
-  error: string;
+  page: number;
+  results: movie[];
 }
 
 export interface genreList {
-  data: {
-    genres: genre[];
-  };
+  genres: genre[];
 }
 export interface platformList {
-  data: {
-    platforms: platform[];
-  };
+  results: platform[];
 }
 
 export interface postType {
   pageNumber: number;
   pageCount: number;
-  year: string;
-  genres: genre | null;
-  platforms: platform | null;
+  year: number[];
+  genres: genre[];
+  platforms: platform[];
 }

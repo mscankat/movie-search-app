@@ -10,8 +10,8 @@ export default function Genre({
 }: {
   genreList: genre[] | null;
   setGenreList: Dispatch<SetStateAction<genre[] | null>>;
-  selected: genre | null;
-  setSelected: Dispatch<SetStateAction<genre | null>>;
+  selected: genre[] | null;
+  setSelected: Dispatch<SetStateAction<genre[]>>;
 }) {
   const apiURL = process.env.NEXT_PUBLIC_SERVER_HOST || "";
   useEffect(() => {
@@ -20,7 +20,8 @@ export default function Genre({
         console.log("fetching");
         const response = await fetch(apiURL + "/api/genres");
         const genreData: genreList = await response.json();
-        setGenreList(genreData.data.genres);
+        console.log(genreData);
+        setGenreList(genreData.genres);
       } catch (e) {
         console.log("fetch error:", e);
       }
@@ -33,20 +34,26 @@ export default function Genre({
         {genreList?.map((genre) => {
           return (
             <div
-              key={genre.genreId}
+              key={genre.id}
               onClick={(e: React.MouseEvent) => {
-                console.log(genre === selected);
-                if (genre === selected) {
-                  setSelected(null);
+                if (!selected?.includes(genre)) {
+                  setSelected((previous) => {
+                    return previous ? [...previous, genre] : [genre];
+                  });
                 } else {
-                  setSelected(genre);
+                  setSelected(
+                    (previous) =>
+                      previous && previous.filter((val) => val !== genre)
+                  );
                 }
               }}
               className={`${
-                selected === genre ? "bg-red-300" : "bg-white"
+                selected?.includes(genre)
+                  ? "bg-side-text-color text-white"
+                  : "bg-white"
               } px-3 mx-1 my-1  rounded-full border border-black cursor-pointer transition-colors `}
             >
-              {genre.genreName}
+              {genre.name}
             </div>
           );
         })}
