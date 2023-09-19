@@ -24,8 +24,8 @@ export default function List({
         {data ? (
           data.map((movie) => {
             return (
-              <div onClick={() => handleCardClick(movie)}>
-                <Card key={movie.id} movie={movie} />
+              <div key={movie.id} onClick={() => handleCardClick(movie)}>
+                <Card movie={movie} />
               </div>
             );
           })

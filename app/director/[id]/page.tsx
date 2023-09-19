@@ -1,18 +1,32 @@
+"use client";
 import Card from "@/components/Card";
-
+import Popup from "@/components/Popup";
 import { movie } from "@/types/dataType";
 import { options } from "@/utils/fetchOptions";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
-export default async function Page({ params }: { params: { id: string } }) {
+export default function Page({ params }: { params: { id: string } }) {
   const splitParams = params.id.split("-");
   const name = splitParams.slice(1, splitParams.length).join(" ");
-  console.log(splitParams.slice(1, splitParams.length).join(" "));
-  const Url = `https://api.themoviedb.org/3/person/${
-    params.id.split("-")[0]
-  }/movie_credits?language=en-US`;
-  const response = await fetch(Url, options);
-  const data = await response.json();
+  const [selectedMovie, setSelectedMovie] = useState<movie | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleCardClick = (movie: movie) => {
+    setSelectedMovie(movie);
+    setIsModalOpen(true);
+  };
+  const [data, setData] = useState();
+  useEffect(() => {
+    const getData = async () => {
+      const Url = `https://api.themoviedb.org/3/person/${
+        params.id.split("-")[0]
+      }/movie_credits?language=en-US`;
+      const response = await fetch(Url, options);
+      const data = await response.json();
+      setData(data);
+    };
+    getData();
+  }, []);
 
   return (
     <>
@@ -29,13 +43,16 @@ export default async function Page({ params }: { params: { id: string } }) {
           data.crew.map((movie: movie) => {
             if (movie.job === "Director") {
               return (
-                <div className="movie">
+                <div key={movie.id} onClick={() => handleCardClick(movie)}>
                   <Card movie={movie} />
                 </div>
               );
             }
           })}
       </div>
+      {isModalOpen && selectedMovie && (
+        <Popup movie={selectedMovie} onClose={() => setIsModalOpen(false)} />
+      )}
     </>
   );
 }

@@ -10,7 +10,7 @@ export default function Card({ movie }: { movie: movie }) {
           "https://image.tmdb.org/t/p/w300/" + movie.poster_path ||
           "no-image.svg"
         }
-        onError={(e) => (e.currentTarget.src = "no-image.svg")}
+        onError={(e) => (e.currentTarget.src = "/no-image.svg")}
         alt="movie poster"
       />
       <div className="flex justify-between mt-1 w-full">

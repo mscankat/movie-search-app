@@ -42,7 +42,16 @@ export default function Popup({
                 {movie.actors.map((actor) => {
                   return (
                     <div className="hover:underline cursor-pointer">
-                      <Link href={"cast/" + actor.id}>{actor.name}</Link>
+                      <Link
+                        href={
+                          "cast/" +
+                          actor.id +
+                          "-" +
+                          actor.name.split(" ").join("-")
+                        }
+                      >
+                        {actor.name}
+                      </Link>
                     </div>
                   );
                 })}

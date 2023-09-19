@@ -37,8 +37,6 @@ export default function Home() {
       <div className="p-16 text-5xl">Results</div>
 
       <List data={data} setData={setData} />
-
-      <div className="h-20 bg-slate-400">footer</div>
     </>
   );
 }
