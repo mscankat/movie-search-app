@@ -1,6 +1,6 @@
 export interface movie {
   overview: string;
-  genres: number[];
+  genre_ids: number[];
   id: number;
   title: string;
   backdrop_path: string;
@@ -32,7 +32,7 @@ export interface actor {
   actorName: string;
 }
 export interface genre {
-  id: string;
+  id: number;
   name: string;
 }
 export interface director {

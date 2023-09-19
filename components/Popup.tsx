@@ -22,7 +22,6 @@ export default function Popup({
             </button>
           </div>
           <div className="mt-4">
-            {/* Display movie details here */}
             <img
               className="m-auto rounded h-[300px] object-scale-down w-full "
               src={
@@ -75,18 +74,6 @@ export default function Popup({
                 </span>
               </div>
             )}
-
-            {/* <div className="flex mt-2 gap-4">
-              {movie.platforms.map((platform) => {
-                return (
-                  <img
-                    className="w-24"
-                    src={platform.platformLogoUrl}
-                    alt="platform logo"
-                  />
-                );
-              })}
-            </div> */}
           </div>
         </div>
       </div>

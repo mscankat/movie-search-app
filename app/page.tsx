@@ -15,20 +15,11 @@ export default function Home() {
     const getData = async () => {
       try {
         console.log("fetching");
-        const response = await fetch(apiURL + "/api", {
-          method: "POST",
-          body: JSON.stringify({
-            pageNumber: 1,
-            pageSize: 20,
-          }),
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "*",
-          },
-        });
+        const response = await fetch(apiURL + "/api");
         const data = await response.json();
         setData(data);
         setIsLoading(false);
+        console.log(data);
       } catch (error: any) {
         setError(error.message);
         setIsLoading(false);

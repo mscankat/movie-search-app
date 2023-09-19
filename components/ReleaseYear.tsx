@@ -1,9 +1,6 @@
 "use client";
 import { Box, Slider } from "@mui/material";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-function valuetext(value: number) {
-  return `${value}°C`;
-}
 
 export default function ReleaseYear({
   value,
@@ -29,7 +26,6 @@ export default function ReleaseYear({
           value={value}
           onChange={handleChange}
           valueLabelDisplay="auto"
-          getAriaValueText={valuetext}
           min={1990}
           max={2023}
         />
