@@ -25,33 +25,38 @@ export default function Popup({
             {/* Display movie details here */}
             <img
               className="m-auto rounded"
-              src={movie.posterUrl}
+              src={"https://image.tmdb.org/t/p/w300/" + movie.poster_path}
               alt="movie poster"
               width={240}
               height={360}
             />
-            <div className="text-sm font-light">{movie.releaseYear}</div>
-            <div className="text-2xl font-bold">{movie.name}</div>
-            <div className="mb-2">{movie.descriptionContent}</div>
-            <div className="flex gap-2 text-sm">
-              Cast:
-              {movie.actors.map((actor) => {
-                return (
-                  <div className="hover:underline cursor-pointer">
-                    <Link href={"cast/" + actor.actorId}>
-                      {actor.actorName}
-                    </Link>
-                  </div>
-                );
-              })}
-            </div>
-            <div className="mt-1 text-sm">
-              Director:
-              <span className="hover:underline cursor-pointer ml-2">
-                {movie.director.directorName}
-              </span>
-            </div>
-            <div className="flex mt-2 gap-4">
+            <div className="text-sm font-light">{movie.release_date}</div>
+            <div className="text-2xl font-bold">{movie.title}</div>
+            <div className="mb-2">{movie.overview}</div>
+            {movie.actors && (
+              <div className="flex gap-2 text-sm">
+                Cast:
+                {movie.actors.map((actor) => {
+                  return (
+                    <div className="hover:underline cursor-pointer">
+                      <Link href={"cast/" + actor.id}>{actor.name}</Link>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+            {movie.director && (
+              <div className="mt-1 text-sm">
+                Director:
+                <span className="hover:underline cursor-pointer ml-2">
+                  <Link href={"cast/" + movie.director[0].id}>
+                    {movie.director[0].name}
+                  </Link>
+                </span>
+              </div>
+            )}
+
+            {/* <div className="flex mt-2 gap-4">
               {movie.platforms.map((platform) => {
                 return (
                   <img
@@ -61,7 +66,7 @@ export default function Popup({
                   />
                 );
               })}
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

@@ -20,42 +20,46 @@ export default function List({
     setIsModalOpen(true);
   };
 
-  const handleSubmit = () => {
-    if (!post) {
-      return;
-    }
-    const dataToSend = {
-      pageNumber: post.pageNumber + 1,
-      pageCount: 20,
-      year: post.year,
-      genres: post.genres || null,
-      platforms: post.platforms,
-    };
-    fetch(apiURL + "/api/search", {
-      method: "POST",
-      body: JSON.stringify(dataToSend),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setData((previous) => [...previous, ...data.data.movies]);
-        setPost(dataToSend);
-      });
-  };
+  // const handleSubmit = () => {
+  //   if (!post) {
+  //     return;
+  //   }
+  //   const dataToSend = {
+  //     pageNumber: post.pageNumber + 1,
+  //     pageCount: 20,
+  //     year: post.year,
+  //     genres: post.genres || null,
+  //     platforms: post.platforms,
+  //   };
+  //   fetch(apiURL + "/api/search", {
+  //     method: "POST",
+  //     body: JSON.stringify(dataToSend),
+  //   })
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       setData((previous) => [...previous, ...data.data.movies]);
+  //       setPost(dataToSend);
+  //     });
+  // };
   return (
     <>
       <div className="flex flex-wrap  gap-20 justify-center">
-        {data &&
+        {data ? (
           data.map((movie) => {
+            console.log(movie);
             return (
               <div className="movie" onClick={() => handleCardClick(movie)}>
                 <Card movie={movie} />
               </div>
             );
-          })}
+          })
+        ) : (
+          <></>
+        )}
       </div>
-      <div onClick={handleSubmit} className=" my-24 text-center">
+      {/* <div onClick={handleSubmit} className=" my-24 text-center">
         More
-      </div>
+      </div> */}
       {isModalOpen && selectedMovie && (
         <Popup movie={selectedMovie} onClose={() => setIsModalOpen(false)} />
       )}

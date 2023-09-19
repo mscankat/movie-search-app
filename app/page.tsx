@@ -25,13 +25,13 @@ export default function Home() {
             Accept: "*",
           },
         });
-        const movies: dataType = await response.json();
-        console.log(movies);
-        setData(movies.data.movies);
+        const data = await response.json();
+        setData(data);
+        console.log(data);
         setPost({
           pageNumber: 1,
           pageCount: 20,
-          year: "-",
+          year: [2000, 2023],
           genres: null,
           platforms: null,
         });
@@ -43,7 +43,7 @@ export default function Home() {
   }, []);
   return (
     <>
-      <SearchBar data={data} setData={setData} />
+      <SearchBar setData={setData} />
 
       <div className="p-16 text-5xl">Results</div>
 

@@ -7,8 +7,12 @@ export interface movie {
   poster_path: string;
   vote_average: number;
   release_date: string;
-  actor: string[];
-  director: string;
+  actors: actor[];
+  director: actor[];
+}
+export interface actor {
+  id: number;
+  name: string;
 }
 
 export interface movieRequest {
@@ -27,8 +31,8 @@ export interface actor {
   actorName: string;
 }
 export interface genre {
-  genreId: string;
-  genreName: string;
+  id: string;
+  name: string;
 }
 export interface director {
   directorId: string;
@@ -47,9 +51,7 @@ export interface dataType {
 }
 
 export interface genreList {
-  data: {
-    genres: genre[];
-  };
+  genres: genre[];
 }
 export interface platformList {
   data: {

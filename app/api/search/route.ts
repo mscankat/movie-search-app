@@ -10,7 +10,7 @@ export async function POST(req: Request) {
   let movies: movie[] = [];
 
   if (body.genres) {
-    apiURL.searchParams.set("with_genres", body.genres.genreName);
+    apiURL.searchParams.set("with_genres", body.genres.name);
   }
   // console.log(body.year);
   apiURL.searchParams.set(
@@ -27,7 +27,7 @@ export async function POST(req: Request) {
       body.platforms.platformName
     );
   }
-  console.log(apiURL);
+  // console.log(apiURL);
   const getData = async () => {
     try {
       console.log("fetching");
@@ -45,7 +45,7 @@ export async function POST(req: Request) {
       const response = await fetch(creditURL, options);
       const data = await response.json();
       movie.director = data.crew.filter(({ job }: any) => job === "Director");
-      movie.actor = [data.cast[0], data.cast[1], data.cast[2]];
+      movie.actors = [data.cast[0], data.cast[1], data.cast[2]];
       return movie; // Return the modified movie object
     });
 
@@ -53,7 +53,7 @@ export async function POST(req: Request) {
     await Promise.all(moviePromises);
   };
   await getData();
-  console.log(movies);
+  // console.log(typeof movies);
 
-  return NextResponse.json(movies);
+  return NextResponse.json({ movies });
 }

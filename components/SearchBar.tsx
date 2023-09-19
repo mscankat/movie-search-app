@@ -7,10 +7,8 @@ import { genre, movie, platform, postType } from "@/types/dataType";
 import { usePostContext } from "@/utils/PostContext";
 
 export default function SearchBar({
-  data,
   setData,
 }: {
-  data: movie[] | null;
   setData: Dispatch<SetStateAction<movie[] | null>>;
 }) {
   const { post, setPost } = usePostContext();
@@ -45,7 +43,8 @@ export default function SearchBar({
     })
       .then((response) => response.json())
       .then((data) => {
-        setData(data.data.movies);
+        console.log(data.movies);
+        setData(data.movies);
         setPost(dataToSend);
       });
   };
