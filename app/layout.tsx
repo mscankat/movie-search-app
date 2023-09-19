@@ -17,11 +17,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body
-        className={inter.className + " bg-light min-h-screen flex flex-col"}
-      >
+      <body className={inter.className + " bg-light min-h-screen  "}>
         {children}
-        <div className="h-32 bg-side-dark text-white mt-32 flex justify-center items-center ">
+        <div className="h-32 bg-side-dark text-white  flex justify-center items-center  mt-80">
           <div className="text-side-light-text cursor-pointer">
             <Link href={"https://github.com/mscankat/movie-search-app"}>
               GitHub

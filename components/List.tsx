@@ -12,7 +12,6 @@ export default function List({
 }) {
   const [selectedMovie, setSelectedMovie] = useState<movie | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const apiURL = process.env.NEXT_PUBLIC_SERVER_HOST || "";
   const handleCardClick = (movie: movie) => {
     setSelectedMovie(movie);
     setIsModalOpen(true);
