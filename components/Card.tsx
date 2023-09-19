@@ -3,14 +3,14 @@ import { movie } from "@/types/dataType";
 
 export default function Card({ movie }: { movie: movie }) {
   return (
-    <div className="w-[260px] hover:shadow-md cursor-pointer p-2 rounded-sm">
+    <div className="w-[260px] hover:shadow-md cursor-pointer p-2 rounded-sm bg-white transition-all">
       <img
         className="w-[260px] h-[360px] rounded-sm object-fill"
         src={
           "https://image.tmdb.org/t/p/w300/" + movie.poster_path ||
           "no-image.svg"
         }
-        // onError={(e) => (e.currentTarget.src = "no-image.svg")}
+        onError={(e) => (e.currentTarget.src = "no-image.svg")}
         alt="movie poster"
       />
       <div className="flex justify-between mt-1 w-full">
@@ -18,17 +18,7 @@ export default function Card({ movie }: { movie: movie }) {
           <div className="flex justify-between ">
             {movie.release_date}{" "}
             <span>
-              <div className="flex gap-1">
-                {/* {movie.platforms.map((platform) => {
-                  return (
-                    <img
-                      className="w-14"
-                      src={platform.platformLogoUrl}
-                      alt="platform logo"
-                    />
-                  );
-                })} */}
-              </div>
+              <div className="flex gap-1"></div>
             </span>
           </div>
           <div className="text-sm font-semibold">{movie.title}</div>
@@ -54,8 +44,6 @@ export default function Card({ movie }: { movie: movie }) {
           )}
         </div>
       </div>
-
-      {/* <div>{movie.platforms[1].platformName}</div> */}
     </div>
   );
 }

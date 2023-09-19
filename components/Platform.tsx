@@ -37,7 +37,7 @@ export default function Platform({
   }, []);
   return (
     <>
-      <div className="">
+      <div className="text-white">
         <div className="text-center mb-2 font-semibold">Platforms</div>
         {platformList?.map((platform, index) => {
           return (

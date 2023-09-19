@@ -21,9 +21,10 @@ export default function ReleaseYear({
   years.unshift("-");
   return (
     <div className="flex flex-col justify-center items-center">
-      <div className="font-semibold mb-1">Release Year</div>
+      <div className="font-semibold mb-1 text-white">Release Year</div>
       <Box className="  " sx={{ width: 300 }}>
         <Slider
+          color="secondary"
           getAriaLabel={() => "Temperature range"}
           value={value}
           onChange={handleChange}

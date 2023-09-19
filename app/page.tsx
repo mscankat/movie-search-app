@@ -1,14 +1,12 @@
 "use client";
 import List from "@/components/List";
 import SearchBar from "@/components/SearchBar";
-import { dataType, movie } from "@/types/dataType";
-import { usePostContext } from "@/utils/PostContext";
+import { movie } from "@/types/dataType";
 import { useEffect, useState } from "react";
 
 export default function Home() {
   const [data, setData] = useState<movie[] | null>(null);
   const apiURL = process.env.NEXT_PUBLIC_SERVER_HOST || "";
-  const { post, setPost } = usePostContext();
   useEffect(() => {
     const getData = async () => {
       try {
@@ -26,13 +24,6 @@ export default function Home() {
         });
         const data = await response.json();
         setData(data);
-        // setPost({
-        //   pageNumber: 1,
-        //   pageCount: 20,
-        //   year: [2000, 2023],
-        //   genres: null,
-        //   platforms: null,
-        // });
       } catch (e) {
         console.log("fetch error:", e);
       }

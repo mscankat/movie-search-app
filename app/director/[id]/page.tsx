@@ -2,6 +2,7 @@ import Card from "@/components/Card";
 
 import { movie } from "@/types/dataType";
 import { options } from "@/utils/fetchOptions";
+import Link from "next/link";
 
 export default async function Page({ params }: { params: { id: string } }) {
   const splitParams = params.id.split("-");
@@ -15,7 +16,11 @@ export default async function Page({ params }: { params: { id: string } }) {
 
   return (
     <>
-      <nav className="h-24 bg-slate-200">Home</nav>
+      <nav className="h-24 bg-slate-200">
+        <Link href="/">
+          <img className="m-auto pt-2" src="/movie-icon.png" alt="" />
+        </Link>
+      </nav>
       <div className="text-3xl p-20 ">
         Movies by <span className="font-bold">{name}</span>
       </div>

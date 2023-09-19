@@ -48,7 +48,9 @@ export default function Genre({
                 }
               }}
               className={`${
-                selected?.includes(genre) ? "bg-red-300" : "bg-white"
+                selected?.includes(genre)
+                  ? "bg-side-text-color text-white"
+                  : "bg-white"
               } px-3 mx-1 my-1  rounded-full border border-black cursor-pointer transition-colors `}
             >
               {genre.name}
