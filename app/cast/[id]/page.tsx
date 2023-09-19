@@ -1,6 +1,5 @@
 "use client";
 import List from "@/components/List";
-import Popup from "@/components/Popup";
 import { movie } from "@/types/dataType";
 import { options } from "@/utils/fetchOptions";
 import Link from "next/link";
@@ -11,8 +10,6 @@ export default function Page({ params }: { params: { id: string } }) {
   const splitParams = params.id.split("-");
   const name = splitParams.slice(1, splitParams.length).join(" ");
   const [isLoading, setIsLoading] = useState(true);
-  const [selectedMovie, setSelectedMovie] = useState<movie | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [data, setData] = useState<movie[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   useEffect(() => {
@@ -24,7 +21,6 @@ export default function Page({ params }: { params: { id: string } }) {
         const response = await fetch(Url, options);
 
         if (!response.ok) {
-          // Check if the response status is not OK (e.g., 404 or 500)
           throw new Error(`Failed to fetch data. Status: ${response.status}`);
         }
 
@@ -59,9 +55,6 @@ export default function Page({ params }: { params: { id: string } }) {
           <List data={data} setData={setData} />
         )}
       </div>
-      {isModalOpen && selectedMovie && (
-        <Popup movie={selectedMovie} onClose={() => setIsModalOpen(false)} />
-      )}
     </>
   );
 }

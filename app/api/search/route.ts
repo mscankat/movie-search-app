@@ -13,7 +13,6 @@ export async function POST(req: Request) {
   if (body.genres.length > 0) {
     apiURL.searchParams.set("with_genres", genreArr.join("|"));
   }
-  // console.log(body.year);
   apiURL.searchParams.set(
     "primary_release_date.gte",
     Math.min(body.year[0], body.year[1]).toString()
@@ -27,14 +26,12 @@ export async function POST(req: Request) {
   if (body.platforms) {
     apiURL.searchParams.set("with_watch_providers", platformArr.join("|"));
   }
-  console.log(apiURL);
   const getData = async () => {
     try {
       console.log("fetching");
       const response = await fetch(apiURL, options);
       const data: dataType = await response.json();
       movies = data.results;
-      // console.log(movies);
     } catch (e) {
       console.log("fetch error:", e);
     }
@@ -46,14 +43,12 @@ export async function POST(req: Request) {
       const data = await response.json();
       movie.director = data.crew.filter(({ job }: any) => job === "Director");
       movie.actors = [data.cast[0], data.cast[1], data.cast[2]];
-      return movie; // Return the modified movie object
+      return movie;
     });
 
-    // Wait for all promises to resolve using Promise.all
     await Promise.all(moviePromises);
   };
   await getData();
-  // console.log(typeof movies);
 
   return NextResponse.json({ movies });
 }

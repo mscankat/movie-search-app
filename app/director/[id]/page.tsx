@@ -1,7 +1,5 @@
 "use client";
-import Card from "@/components/Card";
 import List from "@/components/List";
-import Popup from "@/components/Popup";
 import Spinner from "@/components/Spinner";
 import { movie } from "@/types/dataType";
 import { options } from "@/utils/fetchOptions";
@@ -12,12 +10,6 @@ export default function Page({ params }: { params: { id: string } }) {
   const splitParams = params.id.split("-");
   const name = splitParams.slice(1, splitParams.length).join(" ");
   const [isLoading, setIsLoading] = useState(true);
-  const [selectedMovie, setSelectedMovie] = useState<movie | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const handleCardClick = (movie: movie) => {
-    setSelectedMovie(movie);
-    setIsModalOpen(true);
-  };
   const [data, setData] = useState<movie[] | null>(null);
   useEffect(() => {
     const getData = async () => {
@@ -45,9 +37,6 @@ export default function Page({ params }: { params: { id: string } }) {
       <div className="flex flex-wrap  gap-20 justify-center">
         {isLoading ? <Spinner /> : <List data={data} setData={setData} />}
       </div>
-      {isModalOpen && selectedMovie && (
-        <Popup movie={selectedMovie} onClose={() => setIsModalOpen(false)} />
-      )}
     </>
   );
 }
