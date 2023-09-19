@@ -22,11 +22,10 @@ export async function POST(req: Request) {
     "primary_release_date.lte",
     Math.max(body.year[0], body.year[1]).toString()
   );
+  let platformArr: string[] = [];
+  body.platforms.forEach((platform) => platformArr.push(platform.provider_id));
   if (body.platforms) {
-    apiURL.searchParams.set(
-      "with_watch_providers",
-      body.platforms.platformName
-    );
+    apiURL.searchParams.set("with_watch_providers", platformArr.join("|"));
   }
   console.log(apiURL);
   const getData = async () => {

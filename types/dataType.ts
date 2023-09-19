@@ -40,9 +40,9 @@ export interface director {
 }
 
 export interface platform {
-  platformId: string;
-  platformLogoUrl: string;
-  platformName: string;
+  provider_id: string;
+  logo_path: string;
+  provider_name: string;
 }
 
 export interface dataType {
@@ -54,9 +54,7 @@ export interface genreList {
   genres: genre[];
 }
 export interface platformList {
-  data: {
-    platforms: platform[];
-  };
+  results: platform[];
 }
 
 export interface postType {
@@ -64,5 +62,5 @@ export interface postType {
   pageCount: number;
   year: number[];
   genres: genre[];
-  platforms: platform | null;
+  platforms: platform[];
 }

@@ -13,8 +13,8 @@ export default function SearchBar({
 }) {
   const { post, setPost } = usePostContext();
   const [value, setValue] = useState<number[]>([1990, 2023]);
-  const [checked, setChecked] = useState(new Array(3).fill(false));
-  const [platformList, setPlatformList] = useState<platform[] | null>(null);
+  const [checked, setChecked] = useState(new Array(7).fill(false));
+  const [platformList, setPlatformList] = useState<platform[]>([]);
   const [genreList, setGenreList] = useState<genre[] | null>(null);
   const [selected, setSelected] = useState<genre[]>([]);
   // const [page, setPage] = useState<number>(0);
@@ -22,7 +22,7 @@ export default function SearchBar({
 
   const handleSubmit = (e: React.MouseEvent) => {
     e.preventDefault();
-    let selectedPlatforms: platform[] | null = null;
+    let selectedPlatforms: platform[] = [];
     platformList?.forEach((platform, index) => {
       if (checked[index]) {
         selectedPlatforms

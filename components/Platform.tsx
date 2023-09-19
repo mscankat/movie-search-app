@@ -10,8 +10,8 @@ export default function Platform({
 }: {
   checked: boolean[];
   setChecked: Dispatch<SetStateAction<boolean[]>>;
-  platformList: platform[] | null;
-  setPlatformList: Dispatch<SetStateAction<platform[] | null>>;
+  platformList: platform[];
+  setPlatformList: Dispatch<SetStateAction<platform[]>>;
 }) {
   const handleChange = (position: number) => {
     const updatedChecked = checked.map((item, index) =>
@@ -27,7 +27,8 @@ export default function Platform({
         console.log("fetching");
         const response = await fetch(apiURL + "/api/platforms");
         const platformData: platformList = await response.json();
-        setPlatformList(platformData.data.platforms);
+        setPlatformList(platformData.results.slice(0, 7));
+        console.log(platformData);
       } catch (e) {
         console.log("fetch error:", e);
       }
@@ -40,17 +41,17 @@ export default function Platform({
         <div className="text-center mb-2 font-semibold">Platforms</div>
         {platformList?.map((platform, index) => {
           return (
-            <div key={platform.platformId} className="">
+            <div key={platform.provider_id} className="">
               <input
                 type="checkbox"
-                name={platform.platformName}
-                value={platform.platformName}
+                name={platform.provider_name}
+                value={platform.provider_name}
                 id={`checkbox-${index}`}
                 checked={checked[index]}
                 onChange={() => handleChange(index)}
               />
               <label className="ml-2" htmlFor={`checkbox-${index}`}>
-                {platform.platformName}
+                {platform.provider_name}
               </label>
             </div>
           );
