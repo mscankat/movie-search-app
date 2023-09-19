@@ -1,14 +1,14 @@
 export interface movie {
-  actors: actor[];
-  descriptionContent: string;
-  director: director;
-  genres: string[];
-  movieId: string;
-  name: string;
-  platforms: platform[];
-  posterUrl: string;
-  rating: number;
-  releaseYear: string;
+  overview: string;
+  genres: number[];
+  id: number;
+  title: string;
+  backdrop_path: string;
+  poster_path: string;
+  vote_average: number;
+  release_date: string;
+  actor: string[];
+  director: string;
 }
 
 export interface movieRequest {
@@ -42,14 +42,8 @@ export interface platform {
 }
 
 export interface dataType {
-  data: {
-    pageNumber: number;
-    pageCount: number;
-    totalRecord: number;
-    movies: movie[];
-  };
-  statusCode: number;
-  error: string;
+  page: number;
+  results: movie[];
 }
 
 export interface genreList {
@@ -66,7 +60,7 @@ export interface platformList {
 export interface postType {
   pageNumber: number;
   pageCount: number;
-  year: string;
+  year: number[];
   genres: genre | null;
   platforms: platform | null;
 }

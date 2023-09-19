@@ -14,7 +14,7 @@ export default function SearchBar({
   setData: Dispatch<SetStateAction<movie[] | null>>;
 }) {
   const { post, setPost } = usePostContext();
-  const [value, setValue] = useState<string>("-");
+  const [value, setValue] = useState<number[]>([1990, 2023]);
   const [checked, setChecked] = useState(new Array(3).fill(false));
   const [platformList, setPlatformList] = useState<platform[] | null>(null);
   const [genreList, setGenreList] = useState<genre[] | null>(null);
