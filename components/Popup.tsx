@@ -52,7 +52,14 @@ export default function Popup({
               <div className="mt-1 text-sm">
                 Director:
                 <span className="hover:underline cursor-pointer ml-2">
-                  <Link href={"cast/" + movie.director[0].id}>
+                  <Link
+                    href={
+                      "director/" +
+                      movie.director[0].id +
+                      "-" +
+                      movie.director[0].name.split(" ").join("-")
+                    }
+                  >
                     {movie.director[0].name}
                   </Link>
                 </span>

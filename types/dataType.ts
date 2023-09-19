@@ -9,6 +9,7 @@ export interface movie {
   release_date: string;
   actors: actor[];
   director: actor[];
+  job?: string;
 }
 export interface actor {
   id: number;
