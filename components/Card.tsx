@@ -30,6 +30,9 @@ export default function Card({ movie }: { movie: movie }) {
             <div className="flex flex-wrap text-xs ">
               Cast:
               {movie.actors.map((actor) => {
+                if (!actor) {
+                  return null;
+                }
                 return (
                   <div key={actor.actorId}>
                     {actor && (

@@ -18,7 +18,7 @@ export default function List({
     setIsModalOpen(true);
   };
 
-  return (
+  return data && data.length > 0 ? (
     <>
       <div className="flex flex-wrap  gap-20 justify-center">
         {data ? (
@@ -38,5 +38,7 @@ export default function List({
         <Popup movie={selectedMovie} onClose={() => setIsModalOpen(false)} />
       )}
     </>
+  ) : (
+    <div className="font-bold text-lg text-center ">No results found!</div>
   );
 }

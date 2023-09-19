@@ -1,6 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,9 +17,17 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className + " bg-light"}>
+      <body
+        className={inter.className + " bg-light min-h-screen flex flex-col"}
+      >
         {children}
-        <div className="h-20 bg-slate-400">footer</div>
+        <div className="h-32 bg-side-dark text-white mt-32 flex justify-center items-center ">
+          <div className="text-side-light-text cursor-pointer">
+            <Link href={"https://github.com/mscankat/movie-search-app"}>
+              GitHub
+            </Link>
+          </div>
+        </div>
       </body>
     </html>
   );
