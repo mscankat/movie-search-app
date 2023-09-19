@@ -8,7 +8,7 @@ export default function Card({ movie }: { movie: movie }) {
         className="w-[260px] h-[360px] rounded-sm object-fill"
         src={
           "https://image.tmdb.org/t/p/w300/" + movie.poster_path ||
-          "no-image.svg"
+          "/no-image.svg"
         }
         onError={(e) => (e.currentTarget.src = "/no-image.svg")}
         alt="movie poster"

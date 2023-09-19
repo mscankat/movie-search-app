@@ -9,6 +9,8 @@ export default function Home() {
   const [data, setData] = useState<movie[] | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const apiURL = process.env.NEXT_PUBLIC_SERVER_HOST || "";
+  const [error, setError] = useState<string | null>(null);
+
   useEffect(() => {
     const getData = async () => {
       try {
@@ -27,8 +29,8 @@ export default function Home() {
         const data = await response.json();
         setData(data);
         setIsLoading(false);
-      } catch (e) {
-        console.log("fetch error:", e);
+      } catch (error: any) {
+        setError(error.message);
         setIsLoading(false);
       }
     };
@@ -36,14 +38,16 @@ export default function Home() {
   }, []);
   return (
     <>
-      <SearchBar setData={setData} />
+      <SearchBar setData={setData} setIsLoading={setIsLoading} />
 
       <div className="p-16 text-5xl">Results</div>
 
-      {isLoading ? ( // Render spinner while loading
-        <Spinner /> // Replace 'Spinner' with your actual spinner component
+      {isLoading ? (
+        <Spinner />
+      ) : error ? (
+        <div className="text-red-500">{error}</div>
       ) : (
-        <List data={data} setData={setData} /> // Render your content when data is available
+        <List data={data} setData={setData} />
       )}
     </>
   );

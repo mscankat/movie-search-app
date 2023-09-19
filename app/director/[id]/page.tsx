@@ -1,6 +1,8 @@
 "use client";
 import Card from "@/components/Card";
+import List from "@/components/List";
 import Popup from "@/components/Popup";
+import Spinner from "@/components/Spinner";
 import { movie } from "@/types/dataType";
 import { options } from "@/utils/fetchOptions";
 import Link from "next/link";
@@ -9,13 +11,14 @@ import { useEffect, useState } from "react";
 export default function Page({ params }: { params: { id: string } }) {
   const splitParams = params.id.split("-");
   const name = splitParams.slice(1, splitParams.length).join(" ");
+  const [isLoading, setIsLoading] = useState(true);
   const [selectedMovie, setSelectedMovie] = useState<movie | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleCardClick = (movie: movie) => {
     setSelectedMovie(movie);
     setIsModalOpen(true);
   };
-  const [data, setData] = useState();
+  const [data, setData] = useState<movie[] | null>(null);
   useEffect(() => {
     const getData = async () => {
       const Url = `https://api.themoviedb.org/3/person/${
@@ -23,7 +26,8 @@ export default function Page({ params }: { params: { id: string } }) {
       }/movie_credits?language=en-US`;
       const response = await fetch(Url, options);
       const data = await response.json();
-      setData(data);
+      setData(data.crew);
+      setIsLoading(false);
     };
     getData();
   }, []);
@@ -39,16 +43,7 @@ export default function Page({ params }: { params: { id: string } }) {
         Movies by <span className="font-bold">{name}</span>
       </div>
       <div className="flex flex-wrap  gap-20 justify-center">
-        {data &&
-          data.crew.map((movie: movie) => {
-            if (movie.job === "Director") {
-              return (
-                <div key={movie.id} onClick={() => handleCardClick(movie)}>
-                  <Card movie={movie} />
-                </div>
-              );
-            }
-          })}
+        {isLoading ? <Spinner /> : <List data={data} setData={setData} />}
       </div>
       {isModalOpen && selectedMovie && (
         <Popup movie={selectedMovie} onClose={() => setIsModalOpen(false)} />

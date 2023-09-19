@@ -7,8 +7,10 @@ import { genre, movie, platform, postType } from "@/types/dataType";
 
 export default function SearchBar({
   setData,
+  setIsLoading,
 }: {
   setData: Dispatch<SetStateAction<movie[] | null>>;
+  setIsLoading: Dispatch<SetStateAction<boolean>>;
 }) {
   const [value, setValue] = useState<number[]>([1990, 2023]);
   const [checked, setChecked] = useState(new Array(7).fill(false));
@@ -18,6 +20,7 @@ export default function SearchBar({
   const apiURL = process.env.NEXT_PUBLIC_SERVER_HOST || "";
 
   const handleSubmit = (e: React.MouseEvent) => {
+    setIsLoading(true);
     e.preventDefault();
     let selectedPlatforms: platform[] = [];
     platformList?.forEach((platform, index) => {
@@ -42,6 +45,7 @@ export default function SearchBar({
       .then((data) => {
         console.log(data.movies);
         setData(data.movies);
+        setIsLoading(false);
       });
   };
   return (

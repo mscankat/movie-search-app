@@ -29,6 +29,7 @@ export default function Popup({
                 "https://image.tmdb.org/t/p/original/" + movie.backdrop_path ||
                 movie.poster_path
               }
+              onError={(e) => (e.currentTarget.src = "/no-image.svg")}
               alt="movie poster"
               width={240}
               height={360}
