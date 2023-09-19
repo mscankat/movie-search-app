@@ -1,3 +1,4 @@
+"use client";
 import { movie } from "@/types/dataType";
 
 export default function Card({ movie }: { movie: movie }) {
@@ -40,8 +41,12 @@ export default function Card({ movie }: { movie: movie }) {
               Cast:
               {movie.actors.map((actor) => {
                 return (
-                  <div className="hover:underline cursor-pointer mx-1">
-                    {actor.name}
+                  <div key={actor.actorId}>
+                    {actor && (
+                      <div className="hover:underline cursor-pointer mx-1">
+                        {actor.name}
+                      </div>
+                    )}
                   </div>
                 );
               })}

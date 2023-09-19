@@ -46,10 +46,9 @@ export default function List({
       <div className="flex flex-wrap  gap-20 justify-center">
         {data ? (
           data.map((movie) => {
-            console.log(movie);
             return (
-              <div className="movie" onClick={() => handleCardClick(movie)}>
-                <Card movie={movie} />
+              <div onClick={() => handleCardClick(movie)}>
+                <Card key={movie.id} movie={movie} />
               </div>
             );
           })

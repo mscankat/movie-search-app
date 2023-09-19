@@ -10,7 +10,6 @@ export default function Home() {
   const apiURL = process.env.NEXT_PUBLIC_SERVER_HOST || "";
   const { post, setPost } = usePostContext();
   useEffect(() => {
-    console.log("asdsad");
     const getData = async () => {
       try {
         console.log("fetching");
@@ -27,14 +26,13 @@ export default function Home() {
         });
         const data = await response.json();
         setData(data);
-        console.log(data);
-        setPost({
-          pageNumber: 1,
-          pageCount: 20,
-          year: [2000, 2023],
-          genres: null,
-          platforms: null,
-        });
+        // setPost({
+        //   pageNumber: 1,
+        //   pageCount: 20,
+        //   year: [2000, 2023],
+        //   genres: null,
+        //   platforms: null,
+        // });
       } catch (e) {
         console.log("fetch error:", e);
       }

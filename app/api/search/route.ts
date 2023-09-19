@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 export async function POST(req: Request) {
   const body: postType = await req.json();
   const apiURL = new URL(
-    "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&append_to_response=details"
+    "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&watch_region=TR&language=en-US&page=1&sort_by=popularity.desc&append_to_response=details"
   );
   let movies: movie[] = [];
   let genreArr: string[] = [];

@@ -50,7 +50,7 @@ export default function SearchBar({
   };
   return (
     <>
-      <div>home</div>
+      <div></div>
       <div className="flex justify-evenly p-3 border-b h-72 items-center">
         <ReleaseYear value={value} setValue={setValue} />
 

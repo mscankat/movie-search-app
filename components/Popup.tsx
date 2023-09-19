@@ -24,8 +24,11 @@ export default function Popup({
           <div className="mt-4">
             {/* Display movie details here */}
             <img
-              className="m-auto rounded"
-              src={"https://image.tmdb.org/t/p/w300/" + movie.poster_path}
+              className="m-auto rounded h-[300px] object-scale-down w-full "
+              src={
+                "https://image.tmdb.org/t/p/original/" + movie.backdrop_path ||
+                movie.poster_path
+              }
               alt="movie poster"
               width={240}
               height={360}
